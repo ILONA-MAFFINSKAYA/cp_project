@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Создание коммерческого предложения</title>
+    <style>
+        body {
+            font-family: serif;
+            margin: 20px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .header img {
+            width: 50px;
+            height: 50px;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .content {
+            margin-bottom: 20px;
+        }
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .table th, .table td {
+            border: 1px solid #000;
+            padding: 8px;
+            text-align: left;
+        }
+        .footer {
+            padding: 10px;
+            text-align: right; /* Прибивает текст к левому краю */
+        }
+        .footer p {
+            margin: 0; /* Убирает стандартные отступы */
+        }
+
+        div {
+            text-align: center;
+        }
+
+        .note-container {
+            position: relative;
+            border: 1px solid rgba(204, 204, 204, 0);
+            padding: 10px;
+            width: 300px;
+        }
+        .note-label {
+            display: inline-block;
+            width: 100px; /* Ширина метки */
+            background-color: white;
+            border-right: 0px solid rgba(204, 204, 204, 0);
+            padding: 10px;
+            box-sizing: border-box;
+        }
+        .note-input {
+            display: inline-block;
+            width: calc(100% - 100px);
+            padding: 10px;
+            border: none;
+            resize: none;
+            outline: none;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <img src="path_to_your_logo.png" alt="Logo">
+        <h1>Коммерческое предложение № {{ offer.number }}</h1>
+        <p>Дата: {{ offer.date }}</p>
+    </div>
+
+    <div class="note-container">
+        <div class="note-label"><strong>Заказчик:</strong></div>
+        <textarea class="note-input" required></textarea>
+    </div>
+
+    <div class="content">
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>Наименование товаров</th>
+                    <th>Кол-во</th>
+                    <th>Цена, руб.</th>
+                    <th>Сумма, руб.</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>{{ product.name }}</td>
+                    <td>{{ quantity }}</td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ total_price }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <br>
+        <br>
+        <div class="note-container">
+            <div class="note-label"><strong>Примечание:</strong></div>
+            <textarea class="note-input" required></textarea>
+        </div>
+
+        <div class="note-container">
+            <div class="note-label"><strong>Доставка:</strong></div>
+            <textarea class="note-input" required></textarea>
+        </div>
+
+        <div class="note-container">
+            <div class="note-label"><strong>Условия оплаты:</strong></div>
+            <textarea class="note-input" required></textarea>
+        </div>
+
+    </div>
+    <div class="footer">
+        <p>Исполнитель: {{ user.last_name }} {{ user.first_name }} {{ user.middle_name }}</p>
+        <p>{{ user.position }}</p>
+        <p>Телефон: {{ user.phone }}</p>
+        <p>Email: {{ user.email }}</p>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Сохранить в программе</button>
+    </form>
+
+    <button type="submit">Сохранить на ПК</button>
+
+</body>
+</html>
